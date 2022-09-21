@@ -61,7 +61,8 @@ common professional-properties
 library
   import: professional-properties
   -- Modules exported by the library.
-  exposed-modules:     MyLib
+  exposed-modules:     MyLib,
+                       HWOne
 
   -- Modules included in this library but not exported.
   -- other-modules:
