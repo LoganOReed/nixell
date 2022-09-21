@@ -18,7 +18,11 @@ toDigitsRev n
   | n > 0     = n `mod` 10 : toDigitsRev (n `div` 10)
   | otherwise = []
 
--- Not implemented correctly, need to go from the back
+reverseDouble :: [Integer] -> [Integer]
+reverseDouble (x:y:xs) = reverseDouble xs ++ 2*y : [x]
+reverseDouble [x]      = [x]
+reverseDouble _        = []
+
 doubleEveryOther :: [Integer] -> [Integer]
-doubleEveryOther (x:y:xs) = x : 2*y : doubleEveryOther xs
-doubleEveryOther _ = []
+doubleEveryOther x = reverseDouble (reverse x)
+
