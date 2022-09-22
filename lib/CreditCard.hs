@@ -2,10 +2,8 @@
 
 -- https://www.cis.upenn.edu/~cis1940/spring13/lectures.html
 
-module HWOne (
-toDigits,
-toDigitsRev,
-doubleEveryOther
+module CreditCard (
+validate
 ) where
 
 toDigits :: Integer -> [Integer]
@@ -32,3 +30,11 @@ sumDigits (x:xs)
   | x > 10     = sumDigits (xs ++ toDigits x)
   | otherwise  = x + sumDigits xs
 sumDigits []   = 0
+
+checkSum :: Integer -> Integer
+checkSum = sumDigits . doubleEveryOther . toDigits
+
+validate :: Integer -> Bool
+validate n
+  | (checkSum n) `rem` 10 == 0 = True
+  | otherwise                  = False

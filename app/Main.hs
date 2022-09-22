@@ -1,11 +1,11 @@
 module Main where
 
 import qualified MyLib (someFunc)
-import qualified HWOne (toDigits, toDigitsRev)
+import qualified CreditCard (validate)
 
 main :: IO ()
 main = do
   putStrLn "Hello, Haskell!"
   MyLib.someFunc
-  print (HWOne.toDigits 54321)
-  print (HWOne.toDigitsRev 54321)
+  print (CreditCard.validate 4012888888881881)
+  print (CreditCard.validate 4012888888881882)
