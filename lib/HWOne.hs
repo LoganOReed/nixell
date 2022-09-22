@@ -26,3 +26,9 @@ reverseDouble _        = []
 doubleEveryOther :: [Integer] -> [Integer]
 doubleEveryOther x = reverseDouble (reverse x)
 
+-- sum digits of integers, i.e. each numberplace
+sumDigits :: [Integer] -> Integer
+sumDigits (x:xs) 
+  | x > 10     = sumDigits (xs ++ toDigits x)
+  | otherwise  = x + sumDigits xs
+sumDigits []   = 0
