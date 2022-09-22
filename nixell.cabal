@@ -63,7 +63,9 @@ library
   -- Modules exported by the library.
   exposed-modules:     MyLib,
                        CreditCard,
-                       Hanoi
+                       Hanoi,
+                       Log,
+                       LogAnalysis
 
   -- Modules included in this library but not exported.
   -- other-modules:
