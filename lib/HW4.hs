@@ -21,3 +21,5 @@ fun2 n | even n    = n + fun2 (n `div` 2)
        | otherwise = fun2 (3 * n + 1)
 
 
+xor :: [Bool] -> Bool
+xor = foldr (\x y -> (x || y) && not (x && y) ) False
