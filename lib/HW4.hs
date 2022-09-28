@@ -23,3 +23,6 @@ fun2 n | even n    = n + fun2 (n `div` 2)
 
 xor :: [Bool] -> Bool
 xor = foldr (\x y -> (x || y) && not (x && y) ) False
+
+map' :: (a -> b) -> [a] -> [b]
+map' f = foldr (\x y -> [f(x)] ++ y) [] 
