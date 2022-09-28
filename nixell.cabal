@@ -67,7 +67,8 @@ library
                        Log,
                        LogAnalysis,
                        HW4,
-                       BinaryTree
+                       BinaryTree,
+                       PrimeSieve
 
   -- Modules included in this library but not exported.
   -- other-modules:
