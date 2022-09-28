@@ -2,6 +2,7 @@ module Main where
 
 import qualified MyLib (someFunc)
 import qualified CreditCard (validate)
+import BinaryTree
 
 main :: IO ()
 main = do
