@@ -1,7 +1,7 @@
 {-# OPTIONS_GHC -Wall #-}
-module LogAnalysis where
+module HWTwo.LogAnalysis where
 
-import Log
+import HWTwo.Log
 
 parseMessage :: String -> LogMessage
 parseMessage str = 

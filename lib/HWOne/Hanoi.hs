@@ -1,6 +1,6 @@
 {-# OPTIONS_GHC -Wall #-}
 
-module Hanoi ( 
+module HWOne.Hanoi ( 
 
 ) where
 

@@ -1,6 +1,6 @@
 {-# OPTIONS_GHC -Wall #-}
 
-module HW4 (
+module HWFour.HW4 (
 
 )where
 

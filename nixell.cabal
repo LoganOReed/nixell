@@ -62,13 +62,13 @@ library
   import: professional-properties
   -- Modules exported by the library.
   exposed-modules:     MyLib,
-                       CreditCard,
-                       Hanoi,
-                       Log,
-                       LogAnalysis,
-                       HW4,
-                       BinaryTree,
-                       PrimeSieve
+                       HWOne.CreditCard,
+                       HWOne.Hanoi,
+                       HWTwo.Log,
+                       HWTwo.LogAnalysis,
+                       HWFour.HW4,
+                       HWFour.BinaryTree,
+                       HWFour.PrimeSieve
 
   -- Modules included in this library but not exported.
   -- other-modules:

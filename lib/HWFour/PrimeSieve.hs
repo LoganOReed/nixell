@@ -1,6 +1,6 @@
 {-# OPTIONS_GHC -Wall #-}
 
-module PrimeSieve (
+module HWFour.PrimeSieve (
 
 )where
 

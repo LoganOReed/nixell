@@ -1,5 +1,5 @@
 {-# OPTIONS_GHC -Wall #-}
-module BinaryTree (
+module HWFour.BinaryTree (
 foldTree
 )where
 
