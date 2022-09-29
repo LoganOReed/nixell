@@ -75,3 +75,24 @@ instance Num (Stream Integer) where
 
 instance Fractional (Stream Integer) where
   (/) a@(Cons x1 c1) b@(Cons x2 c2) = Cons (x1 `div` x2) (streamMap (`div` x2) (c1 - ((a / b)*c2)))
+
+-- Uses Generating Functions to Define Closed Form Solution for Fib Nums
+fib3 :: Stream Integer
+fib3 = (x /) (1 - x - x^2)
+
+--- Exercise 7
+
+type Matrix = ((Integer, Integer), (Integer, Integer))
+
+instance Num Matrix where
+  fromInteger n = ((n,0), (0,n))
+  (*) ((a1,b1),(c1,d1)) ((a2,b2),(c2,d2)) = ( ((a1*a2 + b1*c2), (a1*b2 + b1*d2)) , ((c1*a2 + d1*c2), (c1*b2 + d1*d2)) )
+  (+) ((a1,b1),(c1,d1)) ((a2,b2),(c2,d2)) = ( (a1 + a2 , b1 + b2) , (c1 + c2, d1 + d2) )
+
+f :: Matrix
+f = ((1,1) , (1,0))
+
+--fib4 :: Integer -> Integer
+-- log time fib generator
+fib4 0 = 0
+fib4 n = fst . fst $ f ^ (n - 1)
