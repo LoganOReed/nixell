@@ -68,7 +68,11 @@ library
                        HWTwo.LogAnalysis,
                        HWFour.HW4,
                        HWFour.BinaryTree,
-                       HWFour.PrimeSieve
+                       HWFour.PrimeSieve,
+                       HWSeven.Buffer,
+                       HWSeven.Sized,
+                       HWSeven.StringBuffer,
+                       HWSeven.Editor
 
   -- Modules included in this library but not exported.
   -- other-modules:
@@ -78,7 +82,8 @@ library
 
   -- Other library packages from which modules are imported.
   build-depends:       base ^>=4.12.0.0,
-                       protolude
+                       protolude,
+                       mtl
 
   -- Directories containing source files.
   hs-source-dirs:      lib

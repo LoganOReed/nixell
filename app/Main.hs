@@ -1,12 +1,11 @@
 module Main where
 
-import qualified MyLib (someFunc)
-import qualified HWOne.CreditCard (validate)
-import HWFour.BinaryTree
+import HWSeven.StringBuffer
+import HWSeven.Editor
 
-main :: IO ()
-main = do
-  putStrLn "Hello, Haskell!"
-  MyLib.someFunc
-  print (HWOne.CreditCard.validate 4012888888881881)
-  print (HWOne.CreditCard.validate 4012888888881882)
+main = runEditor editor $ unlines
+         [ "This buffer is for notes you don't want to save, and for"
+         , "evaluation of steam valve coefficients."
+         , "To load a different file, type the character L followed"
+         , "by the name of the file."
+         ]
