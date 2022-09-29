@@ -1,4 +1,5 @@
 {-# OPTIONS_GHC -Wall #-}
+{-# LANGUAGE FlexibleInstances #-}
 
 module Fibonacci (
 
@@ -45,3 +46,32 @@ streamMap f (Cons y c) = Cons (f y) $ streamMap f c
 
 streamFromSeed :: (a -> a) -> a -> Stream a
 streamFromSeed f x = Cons x (streamFromSeed f (f x))
+
+--- Exercise Five
+
+nats :: Stream Integer 
+nats = streamFromSeed (+1) 0
+
+interleaveStreams :: Stream a -> Stream a -> Stream a
+interleaveStreams (Cons x1 c1) (Cons x2 c2) = Cons x1 (Cons x2 (interleaveStreams c1 c2))
+
+ruler :: Stream Integer
+ruler = startRuler 0
+
+startRuler :: Integer -> Stream Integer
+startRuler y = interleaveStreams (streamRepeat y) (startRuler (y+1))
+
+--- Exercise 6
+
+-- Represents generating function
+x :: Stream Integer
+x = Cons 0 (Cons 1 (streamRepeat 0))
+
+instance Num (Stream Integer) where
+  fromInteger n                   = Cons n (streamRepeat 0)
+  negate                          = streamMap (* (-1))
+  (+) (Cons x1 c1) (Cons x2 c2)   = Cons (x1 + x2) ((+) c1 c2)
+  (*) (Cons x1 c1) b@(Cons x2 c2) = Cons (x1 * x2) ((streamMap (*x1) c2) + ((*) c1 b))
+
+instance Fractional (Stream Integer) where
+  (/) a@(Cons x1 c1) b@(Cons x2 c2) = Cons (x1 `div` x2) (streamMap (`div` x2) (c1 - ((a / b)*c2)))
