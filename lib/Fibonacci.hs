@@ -24,3 +24,13 @@ fibs2 = 0 : 1 : zipWith (+) fibs2 (tail fibs2)
 
 testFibs2 :: Int -> [Integer]
 testFibs2 n = take n fibs2
+
+--- Exercise Three
+
+data Stream a = Cons a (Stream a)
+
+instance Show a => Show (Stream a) where
+  show = show . take 20 . streamToList
+
+streamToList :: Stream a -> [a]
+streamToList (Cons y c) = y : streamToList c
