@@ -1,9 +1,10 @@
 module Main where
 
-import HWSeven.StringBuffer
+import HWSeven.JoinListBuffer
 import HWSeven.Editor
 
-main = runEditor editor $ unlines
+main :: IO()
+main = runEditor editor . createList $ unlines
          [ "This buffer is for notes you don't want to save, and for"
          , "evaluation of steam valve coefficients."
          , "To load a different file, type the character L followed"

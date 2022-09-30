@@ -72,7 +72,10 @@ library
                        HWSeven.Buffer,
                        HWSeven.Sized,
                        HWSeven.StringBuffer,
-                       HWSeven.Editor
+                       HWSeven.Editor,
+                       HWSeven.JoinList,
+                       HWSeven.JoinListBuffer,
+                       HWSeven.Scrabble
 
   -- Modules included in this library but not exported.
   -- other-modules:

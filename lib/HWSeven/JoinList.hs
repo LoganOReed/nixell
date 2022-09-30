@@ -1,12 +1,12 @@
 {-# OPTIONS_GHC -Wall #-}
+{-# LANGUAGE FlexibleInstances, TypeSynonymInstances #-}
 
 
-module HWSeven.JoinList (
-
-)where
+module HWSeven.JoinList where
 
 --import Data.Monoid
 import HWSeven.Sized
+import HWSeven.Scrabble
 
 data JoinList m a = Empty
                   | Single m a
@@ -18,6 +18,7 @@ tag (Single m _)   = m
 tag (Append m _ _) = m
 tag _              = mempty
 
+
 (+++) :: Monoid m => JoinList m a -> JoinList m a -> JoinList m a
 (+++) jl1 jl2 = Append (tag jl1 <> tag jl2) jl1 jl2 
 
@@ -26,6 +27,7 @@ indexJ :: (Sized b, Monoid b) =>
 indexJ _ Empty        = Nothing
 indexJ _ (Single _ a) = Just a
 indexJ n (Append s jl1 jl2)
+  | n < 0       = Nothing
   | n >= sizeS  = Nothing
   | n < s1      = indexJ n jl1
   | otherwise   = indexJ (n - s1) jl2
@@ -33,12 +35,14 @@ indexJ n (Append s jl1 jl2)
         s1     = getSize . size $ tag jl1
 
 
+
+
 dropJ :: (Sized b, Monoid b) => Int -> JoinList b a -> JoinList b a
 dropJ 0 jl = jl
 dropJ _ Empty = Empty
 dropJ _ (Single _ _) = Empty
-dropJ n (Append s jl1@(Single _ _) jl2) = dropJ (n - 1) jl2
-dropJ n (Append s jl1@(Empty) jl2) = dropJ n jl2
+dropJ n (Append _ (Single _ _) jl2) = dropJ (n - 1) jl2
+dropJ n (Append _ (Empty) jl2) = dropJ n jl2
 dropJ n (Append s jl1@(Append _ _ _) jl2)
   | n >= sizeS = Empty 
   | n < s1     = (dropJ n jl1) +++ jl2
@@ -46,6 +50,9 @@ dropJ n (Append s jl1@(Append _ _ _) jl2)
   where sizeS  = getSize $ size s
         s1     = getSize . size $ tag jl1
 
+
+scoreLine :: String -> JoinList Score String
+scoreLine str = Single (scoreString str) str
 
 -- For Testing
 
