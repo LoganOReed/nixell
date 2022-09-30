@@ -32,12 +32,28 @@ indexJ n (Append s jl1 jl2)
   where sizeS  = getSize $ size s
         s1     = getSize . size $ tag jl1
 
+
+dropJ :: (Sized b, Monoid b) => Int -> JoinList b a -> JoinList b a
+dropJ 0 jl = jl
+dropJ _ Empty = Empty
+dropJ _ (Single _ _) = Empty
+dropJ n (Append s jl1@(Single _ _) jl2) = dropJ (n - 1) jl2
+dropJ n (Append s jl1@(Empty) jl2) = dropJ n jl2
+dropJ n (Append s jl1@(Append _ _ _) jl2)
+  | n >= sizeS = Empty 
+  | n < s1     = (dropJ n jl1) +++ jl2
+  | otherwise  = dropJ (n - s1) jl2
+  where sizeS  = getSize $ size s
+        s1     = getSize . size $ tag jl1
+
+
+-- For Testing
+
 jlToList :: JoinList m a -> [a]
 jlToList Empty = []
 jlToList (Single _ a) = [a]
 jlToList (Append _ l1 l2) = jlToList l1 ++ jlToList l2
 
--- For Testing
 newtype Sum n = Sum n
   deriving (Eq, Ord, Show)
 
@@ -56,5 +72,5 @@ instance Num n => Semigroup (Product n) where
 instance Num n => Monoid (Product n) where
   mempty = Product 1
 
--- (Single (Size 1) 'h') +++ (Single (Size 1) 'e') +++ (Single (Size 1) 'l') +++ (Single (Size 1) 'l') +++ (Single (Size 1) 'o')
+-- (Single (Size 1) 'A') +++ (Single (Size 1) 'B') +++ (Single (Size 1) 'C') +++ (Single (Size 1) 'D') +++ (Single (Size 1) 'E')
 -- ( Append (Size 5) (Append (Size 3) (Append (Size 2) (Single (Size 1) 'a') (Single (Size 1) 'b') ) (Single (Size 1) 'c')) (Append (Size 2) (Single (Size 1) 'd') (Single (Size 1) 'e')))
