@@ -1,7 +1,7 @@
 {-# LANGUAGE FlexibleInstances, TypeSynonymInstances #-}
 module HWSeven.JoinListBuffer where
 
-import Data.Monoid
+import Data.Monoid ()
 import Data.String
 
 import HWSeven.Buffer
@@ -11,7 +11,7 @@ import HWSeven.Scrabble
 
 stringValue :: Monoid m => JoinList m String -> String
 stringValue (Single _ a)       = a
-stringValue (Append _ jl1 jl2) = (stringValue jl1) ++ (stringValue jl2)
+stringValue (Append _ jl1 jl2) = stringValue jl1 ++ stringValue jl2
 stringValue _                  = ""
 
 
